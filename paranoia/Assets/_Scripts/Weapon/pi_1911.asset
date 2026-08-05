@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: pi_1911
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 3562327129523446561, guid: 3a98643779f8dd746ac04d7c8e48f2ee, type: 3}
+  gunName: Colt 1911
+  calibre: {fileID: 11400000, guid: 219fc7b3856bb594ab5ef28921a2cc43, type: 2}
+  magazineCapacity: 31
+  maxReserveMags: 12
+  fireModes:
+  - fireMode: 0
+    isSelectFire: 0
+  fireRate: 3000
+  tacReloadTime: 1.62
+  emptyReloadTime: 2.05
+  deployTime: 0.42
+  undeployTime: 0.18
+  ADSTime: 0.16
+  sprintToFireTime: 0.2
+  ADSSway: 0.35
+  muzzleVelocity: 260
+  falloutMin: 25
+  falloffMax: 120
+  verticalRecoil: 0.78
+  recoilDirectionBias: 2
+  horizontalRecoilDirection: 0
+  horizontalRecoilDirectionVariation: 8
+  recoveryDelay: 0.08
+  recoveryRate: 6.5
+  bulletSpread: 5
