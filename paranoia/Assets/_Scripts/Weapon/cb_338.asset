@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4480f08ecc93964baf084ac4e4927d4, type: 3}
-  m_Name: cb_556
+  m_Name: cb_338
   m_EditorClassIdentifier: Assembly-CSharp::CalibreSO
   calibrePrefab: {fileID: 5192256182492313587, guid: 10889dfe2d1c8564b86b9a969b2cc144, type: 3}
-  calibreName: 5.56mm
-  damage: 25
-  minDamage: 15
-  weight: 4
-  penetration: 1
-  headshotMultiplier: 1.35
+  calibreName: .338 Lapua
+  damage: 70
+  minDamage: 52
+  weight: 16.2
+  penetration: 5
+  headshotMultiplier: 2
   pellets: 1
   impactPrefabs:
   - impactType: 0

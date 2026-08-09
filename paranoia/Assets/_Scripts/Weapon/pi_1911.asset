@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
   m_Name: pi_1911
   m_EditorClassIdentifier: Assembly-CSharp::GunSO
-  gunPrefab: {fileID: 3562327129523446561, guid: 3a98643779f8dd746ac04d7c8e48f2ee, type: 3}
+  gunPrefab: {fileID: 3562327129523446561, guid: 73edf14a6cc2fc24591f9aad5a912d98, type: 3}
   gunName: Colt 1911
   calibre: {fileID: 11400000, guid: 219fc7b3856bb594ab5ef28921a2cc43, type: 2}
-  magazineCapacity: 31
+  magazineCapacity: 7
   maxReserveMags: 12
   fireModes:
   - fireMode: 0
     isSelectFire: 0
-  fireRate: 3000
+  fireRate: 300
   tacReloadTime: 1.62
   emptyReloadTime: 2.05
   deployTime: 0.42
@@ -37,4 +37,25 @@ MonoBehaviour:
   horizontalRecoilDirectionVariation: 8
   recoveryDelay: 0.08
   recoveryRate: 6.5
-  bulletSpread: 5
+  ads_standing:
+    stillSpread: 0.02
+    movingSpread: 0.12
+  ads_crouching:
+    stillSpread: 0.02
+    movingSpread: 0.1
+  ads_prone:
+    stillSpread: 0.01
+    movingSpread: 0.08
+  spreadGrowthADS: 0.22
+  spreadRecoveryADS: 4
+  hip_standing:
+    stillSpread: 2
+    movingSpread: 2.6
+  hip_crouching:
+    stillSpread: 1.6
+    movingSpread: 2.1
+  hip_prone:
+    stillSpread: 1
+    movingSpread: 1.5
+  spreadGrowthHip: 0.44
+  spreadRecoveryHip: 3.5

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float runSpeed = 210f; // in Hammer Units per second
     private float sprintSpeed = 275f; // in Hammer Units per second
     private float crouchSpeed = 100f; // in Hammer Units per second
+    private float proneSpeed = 50f; // in Hammer Units per second
     private float jumpPower = 100f;
     private float gravity = -9.81f;
 
@@ -36,7 +37,14 @@ public class PlayerController : MonoBehaviour
 
     private float crouchHeight = 0.9f;
     private float standHeight = 1.8f;
+    private float proneHeight = 0.5f;
+    private float cameraCrouchHeight = 0.8f;
+    private float cameraStandHeight = 1.7f;
+    private float cameraProneHeight = 0.4f;
     private float crouchTransitionSpeed = 8f;
+
+    private float stanceHoldThreshold = 0.3f; // how long "Stance" must be held before it goes from crouch to prone.
+    private float stanceHeldTime;
 
     // movement system explained:
 
@@ -49,11 +57,13 @@ public class PlayerController : MonoBehaviour
     // This is useful for sneaking around, but it is not as fast as sprinting.
     // sprint-crouching uses the same drain rate as sprinting, and the player will be at run speed while doing so.
 
-    private InputAction moveAction;
-    private InputAction lookAction;
-    private InputAction jumpAction;
-    private InputAction sprintAction;
-    private InputAction crouchAction;
+    private InputAction moveAction; // WASD
+    private InputAction lookAction; // Mouse
+    private InputAction jumpAction; // Space
+    private InputAction sprintAction; // L-Shift
+    private InputAction crouchAction; // C
+    private InputAction proneAction; // Z
+    private InputAction stanceAction; // L-CTRL
 
     private Transform cameraTransform;
 
@@ -77,8 +87,22 @@ public class PlayerController : MonoBehaviour
     // True once we've fired at least one shot in the current firing sequence.
     private bool hasRecoilStarted;
 
+    // The GunSO's recoil values are treated as "design intent" numbers, but they
+    // translate to far more noticeable degrees than expected once actually applied
+    // to the camera every shot. This scales them down without needing to touch
+    // every gun's inspector values.
+    private const float recoilScale = 0.35f;
+
     public MovementState currentMovementState;
     public StanceState currentStanceState;
+
+    public bool IsMoving { get; private set; } // true if the player has any move input, used for hip-fire/ADS spread calculations.
+    public bool IsAiming { get; private set; } // set by GunRuntime when the player is ADS-ing, used for spread calculations.
+
+    public void SetAiming(bool aiming)
+    {
+        IsAiming = aiming;
+    }
 
     private void Awake()
     {
@@ -87,6 +111,8 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInput.actions["Jump"];
         sprintAction = playerInput.actions["Sprint"];
         crouchAction = playerInput.actions["Crouch"];
+        proneAction = playerInput.actions["Prone"];
+        stanceAction = playerInput.actions["Stance"];
 
         cameraTransform = playerCamera.transform;
         currentStamina = LungCapacity;
@@ -99,7 +125,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleRecoilRecovery();
         HandleLook();
-        HandleCrouch();
+        HandleStance();
         HandleMovement();
     }
 
@@ -250,7 +276,7 @@ public class PlayerController : MonoBehaviour
 
         // Add this shot's horizontal recoil to the accumulated
         // horizontal recoil.
-        recoilYaw += horizontalKick;
+        recoilYaw += horizontalKick * recoilScale;
 
 
         // ------------------------------------------------------------
@@ -343,14 +369,68 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleCrouch()
+    private void HandleStance()
     {
-        bool crouchHeld = crouchAction.IsPressed();
-        isCrouching = crouchHeld;
+        // Crouch/Prone toggles ("C" and "Z") directly set the stance.
+        if (crouchAction.WasPressedThisFrame())
+        {
+            currentStanceState = currentStanceState == StanceState.Crouching ? StanceState.Standing : StanceState.Crouching;
+        }
 
-        float targetHeight = isCrouching ? crouchHeight : standHeight;
+        if (proneAction.WasPressedThisFrame())
+        {
+            currentStanceState = currentStanceState == StanceState.Proning ? StanceState.Standing : StanceState.Proning;
+        }
+
+        // "Stance" (L-CTRL): tap to crouch, hold to prone.
+        if (stanceAction.WasPressedThisFrame())
+        {
+            stanceHeldTime = 0f;
+        }
+
+        if (stanceAction.IsPressed())
+        {
+            stanceHeldTime += Time.deltaTime;
+
+            if (stanceHeldTime >= stanceHoldThreshold)
+            {
+                currentStanceState = StanceState.Proning;
+            }
+        }
+
+        if (stanceAction.WasReleasedThisFrame())
+        {
+            if (stanceHeldTime < stanceHoldThreshold)
+            {
+                // short tap - toggle crouch.
+                currentStanceState = currentStanceState == StanceState.Crouching ? StanceState.Standing : StanceState.Crouching;
+            }
+
+            stanceHeldTime = 0f;
+        }
+
+        isCrouching = currentStanceState == StanceState.Crouching;
+
+        float targetHeight = currentStanceState switch
+        {
+            StanceState.Crouching => crouchHeight,
+            StanceState.Proning => proneHeight,
+            _ => standHeight
+        };
+
         controller.height = Mathf.Lerp(controller.height, targetHeight, crouchTransitionSpeed * Time.deltaTime);
         controller.center = new Vector3(0f, controller.height / 2f, 0f);
+
+        float targetCameraHeight = currentStanceState switch
+        {
+            StanceState.Crouching => cameraCrouchHeight,
+            StanceState.Proning => cameraProneHeight,
+            _ => cameraStandHeight
+        };
+
+        Vector3 cameraLocalPosition = playerCameraLookAtTransform.localPosition;
+        cameraLocalPosition.y = Mathf.Lerp(cameraLocalPosition.y, targetCameraHeight, crouchTransitionSpeed * Time.deltaTime);
+        playerCameraLookAtTransform.localPosition = cameraLocalPosition;
     }
 
     private void HandleMovement()
@@ -374,32 +454,45 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = (cameraRight * moveInput.x) + (cameraForward * moveInput.y);
         moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
 
-        bool sprintHeld = sprintAction.IsPressed() && moveInput.y > 0f;
+        IsMoving = moveInput.sqrMagnitude > 0.01f;
+
+        bool sprintHeld = sprintAction.IsPressed() && moveInput.y > 0f && currentStanceState != StanceState.Proning;
         bool wantsToSprint = sprintHeld && currentStamina > 0f;
         bool outOfStaminaWhileSprinting = sprintHeld && currentStamina <= 0f;
 
         float speed;
-        if (isCrouching)
+        if (currentStanceState == StanceState.Proning)
+        {
+            // cannot sprint while prone, always moves at prone speed.
+            speed = proneSpeed;
+            isSprinting = false;
+            currentMovementState = MovementState.Walking;
+        }
+        else if (isCrouching)
         {
             // sprint-crouching moves at run speed but still drains stamina like sprinting.
             speed = wantsToSprint ? runSpeed : crouchSpeed;
             isSprinting = wantsToSprint;
+            currentMovementState = wantsToSprint ? MovementState.Running : MovementState.Walking;
         }
         else if (wantsToSprint)
         {
             speed = sprintSpeed;
             isSprinting = true;
+            currentMovementState = MovementState.Sprinting;
         }
         else if (outOfStaminaWhileSprinting)
         {
             // still holding sprint but ran out of stamina - reduced to run speed, no drain.
             speed = runSpeed;
             isSprinting = false;
+            currentMovementState = MovementState.Running;
         }
         else
         {
             speed = walkSpeed;
             isSprinting = false;
+            currentMovementState = MovementState.Walking;
         }
 
         HandleStamina();

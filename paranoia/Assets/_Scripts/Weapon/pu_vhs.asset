@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
   m_Name: pu_vhs
   m_EditorClassIdentifier: Assembly-CSharp::GunSO
-  gunPrefab: {fileID: 3562327129523446561, guid: 3a98643779f8dd746ac04d7c8e48f2ee, type: 3}
+  gunPrefab: {fileID: 3562327129523446561, guid: 817ed168bc412cb488fa959a3149f479, type: 3}
   gunName: VHS-K2
-  calibre: {fileID: 11400000, guid: 219fc7b3856bb594ab5ef28921a2cc43, type: 2}
+  calibre: {fileID: 11400000, guid: f10391ff420036743bc39f6b1d73c68b, type: 2}
   magazineCapacity: 30
   maxReserveMags: 10
   fireModes:
@@ -35,8 +35,29 @@ MonoBehaviour:
   falloffMax: 250
   verticalRecoil: 0.75
   recoilDirectionBias: 0
-  horizontalRecoilDirection: 0.25
-  horizontalRecoilDirectionVariation: 0.5
-  recoveryDelay: 0.08
+  horizontalRecoilDirection: 3
+  horizontalRecoilDirectionVariation: 5
+  recoveryDelay: 0.053
   recoveryRate: 8.8
-  bulletSpread: 5
+  ads_standing:
+    stillSpread: 0.05
+    movingSpread: 0.25
+  ads_crouching:
+    stillSpread: 0.04
+    movingSpread: 0.17
+  ads_prone:
+    stillSpread: 0.03
+    movingSpread: 0.14
+  spreadGrowthADS: 0.33
+  spreadRecoveryADS: 3.9
+  hip_standing:
+    stillSpread: 1.95
+    movingSpread: 2.6
+  hip_crouching:
+    stillSpread: 1.55
+    movingSpread: 2.05
+  hip_prone:
+    stillSpread: 0.95
+    movingSpread: 1.45
+  spreadGrowthHip: 0.66
+  spreadRecoveryHip: 3.2

@@ -42,9 +42,20 @@ public class GunSO : ScriptableObject
     public float recoveryRate; // in degrees per second
 
     [Header("Accuracy/Spread Stats")] // assume everything is in degrees
-    // (not finished yet)
     // not to be confused with recoil, which is the movement of the gun when firing, spread is the accuracy of the gun when firing.
-    public float bulletSpread; // what is the maximum spread of the bullets when firing (in degrees) - this is the "cone of fire" that the bullets can be fired in.
+    // ADS zone:
+    public SpreadData ads_standing;
+    public SpreadData ads_crouching;
+    public SpreadData ads_prone;
+    public float spreadGrowthADS; // how much the spread grows when firing in ADS, in degrees per shot
+    public float spreadRecoveryADS; // how much the spread recovers when not firing in ADS, in degrees per second
+
+    // Hip-Fire zone:
+    public SpreadData hip_standing;
+    public SpreadData hip_crouching;
+    public SpreadData hip_prone;
+    public float spreadGrowthHip; // how much the spread grows when firing in Hip-Fire, in degrees per shot
+    public float spreadRecoveryHip; // how much the spread recovers when not firing in Hip-Fire, in degrees per second
 }
 
 [Serializable]
@@ -52,4 +63,11 @@ public class FireModeData
 {
     public FireMode fireMode;
     public bool isSelectFire; // says if the firemode is only accessible with the "select fire" attachment.
+}
+
+[Serializable]
+public class SpreadData // in degrees.
+{
+    public float stillSpread; // in degrees, how much the spread is when not moving
+    public float movingSpread; // in degrees, how much the spread is when moving
 }

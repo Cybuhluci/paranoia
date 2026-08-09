@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: pu_huar
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 3562327129523446561, guid: 3a98643779f8dd746ac04d7c8e48f2ee, type: 3}
+  gunName: G224AR
+  calibre: {fileID: 11400000, guid: 587e79cef9e0e6f4da455637d2b36181, type: 2}
+  magazineCapacity: 30
+  maxReserveMags: 10
+  fireModes:
+  - fireMode: 1
+    isSelectFire: 0
+  - fireMode: 0
+    isSelectFire: 1
+  fireRate: 750
+  tacReloadTime: 2.25
+  emptyReloadTime: 3.05
+  deployTime: 0.56
+  undeployTime: 0.23
+  ADSTime: 0.19
+  sprintToFireTime: 0.26
+  ADSSway: 0.45
+  muzzleVelocity: 800
+  falloutMin: 55
+  falloffMax: 350
+  verticalRecoil: 0.75
+  recoilDirectionBias: 2
+  horizontalRecoilDirection: 3
+  horizontalRecoilDirectionVariation: 4
+  recoveryDelay: 0.05
+  recoveryRate: 8.6
+  ads_standing:
+    stillSpread: 0.04
+    movingSpread: 0.22
+  ads_crouching:
+    stillSpread: 0.03
+    movingSpread: 0.15
+  ads_prone:
+    stillSpread: 0.02
+    movingSpread: 0.11
+  spreadGrowthADS: 0.3
+  spreadRecoveryADS: 4.1
+  hip_standing:
+    stillSpread: 2.1
+    movingSpread: 2.75
+  hip_crouching:
+    stillSpread: 1.7
+    movingSpread: 2.2
+  hip_prone:
+    stillSpread: 1
+    movingSpread: 1.5
+  spreadGrowthHip: 0.6
+  spreadRecoveryHip: 3.4
