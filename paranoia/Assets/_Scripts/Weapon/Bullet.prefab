@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletRuntime
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 1572928
+    m_Bits: 1572932
   impactPrefabs: []
 --- !u!33 &3923938914110270869
 MeshFilter:

@@ -629,7 +629,7 @@ MonoBehaviour:
   maxAimDistance: 500
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 1572928
+    m_Bits: 1572932
   playerInput: {fileID: 0}
   gunMain: {fileID: 0}
   gunAnimator: {fileID: 0}

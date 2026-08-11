@@ -9,6 +9,7 @@ TagManager:
   - Wood
   - Concrete
   - Metal
+  - Head
   layers:
   - Default
   - TransparentFX

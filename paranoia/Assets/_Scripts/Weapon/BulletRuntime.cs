@@ -77,7 +77,7 @@ public class BulletRuntime : MonoBehaviour
             {
                 impactType = ImpactType.Wood;
             }
-            else if (hit.collider.CompareTag("Flesh"))
+            else if (hit.collider.CompareTag("Flesh") || hit.collider.CompareTag("Head"))
             {
                 impactType = ImpactType.Flesh;
             }

@@ -237,6 +237,12 @@ public class GunRuntime : MonoBehaviour
             return;
         }
 
+        // cannot fire while downed.
+        if (playerController != null && playerController.IsDowned)
+        {
+            return;
+        }
+
         // cannot fire while moving in prone.
         if (playerController != null && playerController.currentStanceState == StanceState.Proning && playerController.IsMoving)
         {

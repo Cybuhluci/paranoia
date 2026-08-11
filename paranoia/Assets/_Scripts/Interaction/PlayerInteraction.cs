@@ -25,7 +25,7 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractable currentInteractable;
     private GameObject currentInteractableObject;
 
-    private bool isHoldInteracting;
+    public bool isHoldInteracting = false;
     private float holdInteractionTime; // how long the hold interaction has been held, in seconds.
     private float requiredHoldTime = 0.25f; // how long the player needs to hold the interact key for a hold interaction.
 

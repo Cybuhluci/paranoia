@@ -42,6 +42,8 @@ public class GunMain : MonoBehaviour
     public GunSO CurrentGun { get; private set; }
     public WeaponSlot CurrentSlot { get; private set; }
 
+    private bool isDisabled; // true once weapons have been stripped from the player (e.g. downed/game over) - blocks switching and hides the held gun.
+
     private void Awake()
     {
         previousWeaponAction = playerInput.actions["Previous"];
@@ -192,11 +194,26 @@ public class GunMain : MonoBehaviour
         return inventory[(int)slot];
     }
 
+    // called when the player is downed/game-over'd - hides whatever gun is currently held and blocks switching until re-enabled.
+    public void DisableWeapons()
+    {
+        isDisabled = true;
+        StopAllCoroutines();
+        isSwitching = false;
+
+        if (currentGunInstance != null)
+        {
+            currentGunInstance.SetActive(false);
+        }
+
+        gunRuntime = null;
+    }
+
     private void Update()
     {
         ammoDisplay.text = gunRuntime != null ? $"{gunRuntime.CurrentAmmo}/{gunRuntime.ReserveAmmo}" : "No Gun";
 
-        if (isSwitching)
+        if (isDisabled || isSwitching)
         {
             return;
         }

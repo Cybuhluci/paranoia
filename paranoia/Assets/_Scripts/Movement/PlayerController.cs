@@ -99,9 +99,26 @@ public class PlayerController : MonoBehaviour
     public bool IsMoving { get; private set; } // true if the player has any move input, used for hip-fire/ADS spread calculations.
     public bool IsAiming { get; private set; } // set by GunRuntime when the player is ADS-ing, used for spread calculations.
 
+    public bool IsDowned { get; private set; } // true once the player has been downed (out of health) - blocks movement and shooting.
+
     public void SetAiming(bool aiming)
     {
         IsAiming = aiming;
+    }
+
+    // called by PlayerHealth when the player goes down (either awaiting self-revive, or as part of the game over sequence).
+    // forces the player into a stationary prone stance and blocks all further movement input.
+    public void SetDowned(bool downed)
+    {
+        IsDowned = downed;
+
+        if (downed)
+        {
+            currentStanceState = StanceState.Proning;
+            isCrouching = false;
+            isSprinting = false;
+            currentMovementState = MovementState.Walking;
+        }
     }
 
     private void Awake()
@@ -126,6 +143,14 @@ public class PlayerController : MonoBehaviour
         HandleRecoilRecovery();
         HandleLook();
         HandleStance();
+
+        if (IsDowned)
+        {
+            // downed players cannot move at all - stance handling above still keeps them locked at prone height.
+            IsMoving = false;
+            return;
+        }
+
         HandleMovement();
     }
 
