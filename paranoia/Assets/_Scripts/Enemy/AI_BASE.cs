@@ -7,16 +7,18 @@ using UnityEngine.AI;
 public class AI_BASE : MonoBehaviour
 {
     protected NavMeshAgent agent;
+    protected Collider bodyCollider; // used to temporarily disable collision, e.g. while climbing through a barrier window.
     protected Transform playerTransform; // cached reference to the player, so subclasses dont each need to find it themselves.
     protected float distanceToPlayer;
 
-    [SerializeField] protected int maxHealth = 100;
-    protected int currentHealth;
+    [SerializeField] protected int maxHealth; // this is set per enemy spawn
+    protected float currentHealth;
     protected bool isDead;
 
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        bodyCollider = GetComponentInChildren<Collider>();
 
         PlayerController player = FindAnyObjectByType<PlayerController>();
         if (player != null)
@@ -57,6 +59,34 @@ public class AI_BASE : MonoBehaviour
         if (agent != null && agent.isOnNavMesh)
         {
             agent.isStopped = true;
+        }
+    }
+
+    // returns true if there is a complete (unobstructed) NavMesh path from this agent to the destination.
+    // if the destination is outside the reachable NavMesh area (e.g. behind a barrier), this returns false.
+    protected bool HasPathTo(Vector3 destination)
+    {
+        if (agent == null || !agent.isOnNavMesh)
+        {
+            return false;
+        }
+
+        NavMeshPath path = new NavMeshPath();
+
+        if (agent.CalculatePath(destination, path))
+        {
+            return path.status == NavMeshPathStatus.PathComplete;
+        }
+
+        return false;
+    }
+
+    // enables/disables collision on this enemy's body - used to "phase through" a barrier window while climbing through it.
+    protected void SetCollisionEnabled(bool enabled)
+    {
+        if (bodyCollider != null)
+        {
+            bodyCollider.enabled = enabled;
         }
     }
 

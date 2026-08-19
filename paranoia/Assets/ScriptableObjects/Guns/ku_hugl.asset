@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: ku_hugl
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 0}
+  gunName: G40GL
+  weaponClass: 9
+  calibre: {fileID: 0}
+  magazineCapacity: 1
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 0
+    isSelectFire: 0
+  weight: 1.5
+  fireRate: 18
+  tacReloadTime: 3.1
+  emptyReloadTime: 3.1
+  deployTime: 0.75
+  undeployTime: 0.35
+  ADSTime: 0.28
+  sprintToFireTime: 0.45
+  ADSSway: 0.12
+  headshotMultiplier: 1
+  muzzleVelocity: 76
+  falloffMin: 200
+  falloffMax: 500
+  verticalKick: 0.1
+  horizontalKickDirectionBias: 0
+  horizontalKickDirectionVariation: 0
+  recoveryDelay: 0
+  recoveryRate: 10
+  semiautoDynamicDispersionMultiplier: 1
+  adsMechanicalDispersion: 0
+  adsDynamicDispersion: 0
+  adsDynamicDispersionRecoveryRate: 0
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1
+  adsCrouchMults:
+    stillMultiplier: 1
+    movingMultiplier: 1
+  adsProneMults:
+    stillMultiplier: 1
+    movingMultiplier: 1
+  hipMechanicalDispersion: 1
+  hipDynamicDispersion: 0
+  hipDynamicDispersionRecoveryRate: 0
+  hipStandMults:
+    stillMultiplier: 0
+    movingMultiplier: 1
+  hipCrouchMults:
+    stillMultiplier: 1
+    movingMultiplier: 1
+  hipProneMults:
+    stillMultiplier: 1
+    movingMultiplier: 1

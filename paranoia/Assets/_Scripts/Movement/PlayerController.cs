@@ -16,13 +16,13 @@ public class PlayerController : MonoBehaviour
     // any more of these "set in inspector" variables should be added here.
 
     [Header("Movement Settings")]
-    //(1 Hammer Unit = 1 / 16 of a foot(about 2cm))
-    private float walkSpeed = 175f; // in Hammer Units per second 
-    private float runSpeed = 210f; // in Hammer Units per second
-    private float sprintSpeed = 275f; // in Hammer Units per second
-    private float crouchSpeed = 100f; // in Hammer Units per second
-    private float proneSpeed = 50f; // in Hammer Units per second
-    private float jumpPower = 100f;
+    
+    private float walkSpeed = 3;
+    private float runSpeed = 4.5f; 
+    private float sprintSpeed = 5.5f; 
+    private float crouchSpeed = 2; 
+    private float proneSpeed = 1;
+    private float jumpPower = 1;
     private float gravity = -9.81f;
 
     private float sensitivityBase = 50; // the "base sensitivity" for the mouse, which is used when calculating the actual sensitivity.
@@ -235,34 +235,11 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyRecoil(
         float verticalRecoil,
-        float horizontalDirection,
+        float horizontalBias,
         float horizontalVariation,
-        RecoilDirection biasDirection,
         float recoveryDelay,
         float recoveryRate)
     {
-        // ------------------------------------------------------------
-        // DETERMINE HORIZONTAL BIAS
-        // ------------------------------------------------------------
-
-        float horizontalBias = Mathf.Abs(horizontalDirection);
-
-        switch (biasDirection)
-        {
-            case RecoilDirection.Left:
-                horizontalBias = -horizontalBias;
-                break;
-
-            case RecoilDirection.Right:
-                break;
-
-            case RecoilDirection.Neutral:
-                // Neutral recoil has no preferred direction.
-                horizontalBias = 0f;
-                break;
-        }
-
-
         // ------------------------------------------------------------
         // HORIZONTAL RECOIL
         // ------------------------------------------------------------
@@ -521,10 +498,7 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleStamina();
-
-        // convert Hammer Units per second to Unity units per second (1 HU = 1/16 foot ? 0.01905m).
-        const float hammerUnitToMeters = 0.01905f;
-        Vector3 finalMove = moveDirection * (speed * hammerUnitToMeters);
+        Vector3 finalMove = moveDirection * (speed);
 
         if (controller.isGrounded)
         {
@@ -532,7 +506,7 @@ public class PlayerController : MonoBehaviour
 
             if (jumpAction.WasPressedThisFrame())
             {
-                velocity.y = Mathf.Sqrt(jumpPower * hammerUnitToMeters * -2f * gravity);
+                velocity.y = Mathf.Sqrt(jumpPower * -2f * gravity);
             }
         }
 

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: pi_xten
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 3562327129523446561, guid: 3fb222df4db985344bac335abd423cf2, type: 3}
+  gunName: SIG P320 XTEN
+  weaponClass: 8
+  calibre: {fileID: 11400000, guid: 77a54f63d631e4b419371d8691361657, type: 2}
+  magazineCapacity: 15
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 0
+    isSelectFire: 0
+  weight: 0.83
+  fireRate: 360
+  tacReloadTime: 1.55
+  emptyReloadTime: 2
+  deployTime: 0.39
+  undeployTime: 0.17
+  ADSTime: 0.15
+  sprintToFireTime: 0.19
+  ADSSway: 0.1
+  headshotMultiplier: 1.35
+  muzzleVelocity: 390
+  falloffMin: 30
+  falloffMax: 140
+  verticalKick: 0.85
+  horizontalKickDirectionBias: -5
+  horizontalKickDirectionVariation: 9
+  recoveryDelay: 85
+  recoveryRate: 6
+  semiautoDynamicDispersionMultiplier: 1
+  adsMechanicalDispersion: 0.08
+  adsDynamicDispersion: 0.085
+  adsDynamicDispersionRecoveryRate: 6
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.2
+  adsCrouchMults:
+    stillMultiplier: 0.65
+    movingMultiplier: 1.5
+  adsProneMults:
+    stillMultiplier: 0.4
+    movingMultiplier: 1.75
+  hipMechanicalDispersion: 0.7
+  hipDynamicDispersion: 0.28
+  hipDynamicDispersionRecoveryRate: 20
+  hipStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.5
+  hipCrouchMults:
+    stillMultiplier: 0.7
+    movingMultiplier: 1.7
+  hipProneMults:
+    stillMultiplier: 0.3
+    movingMultiplier: 2

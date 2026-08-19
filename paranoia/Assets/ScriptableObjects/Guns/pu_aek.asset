@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: pu_aek
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 3562327129523446561, guid: b995b17e4645fe446bd519266e9a6a3d, type: 3}
+  gunName: AEK-971
+  weaponClass: 0
+  calibre: {fileID: 11400000, guid: 3a63cce70d47e9645a70dc305412d423, type: 2}
+  magazineCapacity: 30
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 1
+    isSelectFire: 0
+  - fireMode: 0
+    isSelectFire: 1
+  weight: 3.85
+  fireRate: 900
+  tacReloadTime: 2.34
+  emptyReloadTime: 3.2
+  deployTime: 0.59
+  undeployTime: 0.24
+  ADSTime: 0.19
+  sprintToFireTime: 0.26
+  ADSSway: 0.09
+  headshotMultiplier: 1.7
+  muzzleVelocity: 900
+  falloffMin: 55
+  falloffMax: 325
+  verticalKick: 0.34
+  horizontalKickDirectionBias: 2
+  horizontalKickDirectionVariation: 3
+  recoveryDelay: 55
+  recoveryRate: 10.5
+  semiautoDynamicDispersionMultiplier: 0.8
+  adsMechanicalDispersion: 0.09
+  adsDynamicDispersion: 0.065
+  adsDynamicDispersionRecoveryRate: 5.5
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.2
+  adsCrouchMults:
+    stillMultiplier: 0.65
+    movingMultiplier: 1.45
+  adsProneMults:
+    stillMultiplier: 0.4
+    movingMultiplier: 1.7
+  hipMechanicalDispersion: 0.7
+  hipDynamicDispersion: 0.23
+  hipDynamicDispersionRecoveryRate: 21
+  hipStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.45
+  hipCrouchMults:
+    stillMultiplier: 0.7
+    movingMultiplier: 1.7
+  hipProneMults:
+    stillMultiplier: 0.3
+    movingMultiplier: 1.95

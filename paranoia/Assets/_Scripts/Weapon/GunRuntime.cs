@@ -54,24 +54,27 @@ public class GunRuntime : MonoBehaviour
     private float muzzleVelocity;
     private float bulletWeight;
 
-        private float verticalRecoil;
-    private RecoilDirection recoilDirectionBias;
-    private float horizontalRecoilDirection;
-    private float horizontalRecoilDirectionVariation;
+    private float verticalKick;
+    private float horizontalKickDirectionBias;
+    private float horizontalKickDirectionVariation;
     private float recoveryDelay;
     private float recoveryRate;
 
-    private SpreadData adsStanding;
-    private SpreadData adsCrouching;
-    private SpreadData adsProne;
-    private float spreadGrowthADS;
-    private float spreadRecoveryADS;
+    private float semiautoDynamicDispersionMultiplier;
 
-    private SpreadData hipStanding;
-    private SpreadData hipCrouching;
-    private SpreadData hipProne;
-    private float spreadGrowthHip;
-    private float spreadRecoveryHip;
+    private float adsMechanicalDispersion;
+    private float adsDynamicDispersion;
+    private float adsDynamicDispersionRecoveryRate;
+    private SpreadData adsStandMults;
+    private SpreadData adsCrouchMults;
+    private SpreadData adsProneMults;
+
+    private float hipMechanicalDispersion;
+    private float hipDynamicDispersion;
+    private float hipDynamicDispersionRecoveryRate;
+    private SpreadData hipStandMults;
+    private SpreadData hipCrouchMults;
+    private SpreadData hipProneMults;
     #endregion
 
     private float currentSpread; // in degrees, accumulates while firing and recovers over time.
@@ -176,7 +179,8 @@ public class GunRuntime : MonoBehaviour
 
     private void HandleSpreadRecovery()
     {
-        float recoveryRateToUse = playerController != null && playerController.IsAiming ? spreadRecoveryADS : spreadRecoveryHip;
+        bool isAiming = playerController != null && playerController.IsAiming;
+        float recoveryRateToUse = isAiming ? adsDynamicDispersionRecoveryRate : hipDynamicDispersionRecoveryRate;
         currentSpread = Mathf.MoveTowards(currentSpread, 0f, recoveryRateToUse * Time.deltaTime);
     }
 
@@ -194,24 +198,27 @@ public class GunRuntime : MonoBehaviour
         calibrePrefab = gun.calibre != null ? gun.calibre.calibrePrefab : null;
         calibre = gun.calibre;
 
-        verticalRecoil = gun.verticalRecoil;
-        recoilDirectionBias = gun.recoilDirectionBias;
-        horizontalRecoilDirection = gun.horizontalRecoilDirection;
-        horizontalRecoilDirectionVariation = gun.horizontalRecoilDirectionVariation;
+        verticalKick = gun.verticalKick;
+        horizontalKickDirectionBias = gun.horizontalKickDirectionBias;
+        horizontalKickDirectionVariation = gun.horizontalKickDirectionVariation;
         recoveryDelay = gun.recoveryDelay;
         recoveryRate = gun.recoveryRate;
 
-        adsStanding = gun.ads_standing;
-        adsCrouching = gun.ads_crouching;
-        adsProne = gun.ads_prone;
-        spreadGrowthADS = gun.spreadGrowthADS;
-        spreadRecoveryADS = gun.spreadRecoveryADS;
+        semiautoDynamicDispersionMultiplier = gun.semiautoDynamicDispersionMultiplier;
 
-        hipStanding = gun.hip_standing;
-        hipCrouching = gun.hip_crouching;
-        hipProne = gun.hip_prone;
-        spreadGrowthHip = gun.spreadGrowthHip;
-        spreadRecoveryHip = gun.spreadRecoveryHip;
+        adsMechanicalDispersion = gun.adsMechanicalDispersion;
+        adsDynamicDispersion = gun.adsDynamicDispersion;
+        adsDynamicDispersionRecoveryRate = gun.adsDynamicDispersionRecoveryRate;
+        adsStandMults = gun.adsStandMults;
+        adsCrouchMults = gun.adsCrouchMults;
+        adsProneMults = gun.adsProneMults;
+
+        hipMechanicalDispersion = gun.hipMechanicalDispersion;
+        hipDynamicDispersion = gun.hipDynamicDispersion;
+        hipDynamicDispersionRecoveryRate = gun.hipDynamicDispersionRecoveryRate;
+        hipStandMults = gun.hipStandMults;
+        hipCrouchMults = gun.hipCrouchMults;
+        hipProneMults = gun.hipProneMults;
 
         currentSpread = 0f;
 
@@ -274,8 +281,7 @@ public class GunRuntime : MonoBehaviour
         // spread zone: // must be before spawning the bullet, as it will affect the direction of the bullet.
         // uses variables in the header of "Accuracy/Spread" to determine how much spread is applied, and in what direction. (in GunSO)
         // all this needs to actually end up doing changing the rotation of the muzzleTransform for every bullet.
-        float baseSpread = GetBaseSpread();
-        float totalSpread = baseSpread + currentSpread;
+        float totalSpread = GetBaseSpread();
 
         // bullet spawning zone: // must be after spread, as it will affect the direction of the bullet.
         if (calibrePrefab != null && muzzleTransform != null)
@@ -293,7 +299,15 @@ public class GunRuntime : MonoBehaviour
 
         // every shot grows accumulated spread, which recovers over time in HandleSpreadRecovery().
         bool isAiming = playerController != null && playerController.IsAiming;
-        currentSpread += isAiming ? spreadGrowthADS : spreadGrowthHip;
+        float dynamicDispersionGrowth = isAiming ? adsDynamicDispersion : hipDynamicDispersion;
+
+        // semi-auto weapons build up spread slower than full-auto ones, scaled by the gun's own multiplier.
+        if (currentFireMode == FireMode.SemiAuto)
+        {
+            dynamicDispersionGrowth *= semiautoDynamicDispersionMultiplier;
+        }
+
+        currentSpread += dynamicDispersionGrowth;
 
         // recoil, muzzle flash, etc. go here in a later phase.
         // most of this would take place before spawning the bullet mind you.
@@ -301,37 +315,39 @@ public class GunRuntime : MonoBehaviour
         // recoil zone: // must be after spawning the bullet, to simluate kickback of the gun.
         if (playerController != null)
         {
-            playerController.ApplyRecoil(verticalRecoil, horizontalRecoilDirection, horizontalRecoilDirectionVariation, recoilDirectionBias, recoveryDelay, recoveryRate);
+            playerController.ApplyRecoil(verticalKick, horizontalKickDirectionBias, horizontalKickDirectionVariation, recoveryDelay, recoveryRate);
         }
         // uses variables in the header of "Stability" to determine how much recoil is applied, and in what direction. (in GunSO)
     }
 
     private float GetBaseSpread()
     {
+        // spread calc: MD + (DD/shot * multipliers)
         bool isAiming = playerController != null && playerController.IsAiming;
         bool isMoving = playerController != null && playerController.IsMoving;
         StanceState stance = playerController != null ? playerController.currentStanceState : StanceState.Standing;
 
-        SpreadData spreadData = isAiming
+        float mechanicalDispersion = isAiming ? adsMechanicalDispersion : hipMechanicalDispersion;
+
+        SpreadData spreadMults = isAiming
             ? stance switch
             {
-                StanceState.Crouching => adsCrouching,
-                StanceState.Proning => adsProne,
-                _ => adsStanding
+                StanceState.Crouching => adsCrouchMults,
+                StanceState.Proning => adsProneMults,
+                _ => adsStandMults
             }
             : stance switch
             {
-                StanceState.Crouching => hipCrouching,
-                StanceState.Proning => hipProne,
-                _ => hipStanding
+                StanceState.Crouching => hipCrouchMults,
+                StanceState.Proning => hipProneMults,
+                _ => hipStandMults
             };
 
-        if (spreadData == null)
-        {
-            return 0f;
-        }
+        float multiplier = spreadMults != null
+            ? (isMoving ? spreadMults.movingMultiplier : spreadMults.stillMultiplier)
+            : 1f;
 
-        return isMoving ? spreadData.movingSpread : spreadData.stillSpread;
+        return mechanicalDispersion + (currentSpread * multiplier);
     }
 
     private Vector3 ApplySpread(Vector3 direction, float spreadDegrees)

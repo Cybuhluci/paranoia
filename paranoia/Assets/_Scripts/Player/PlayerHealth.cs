@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -6,12 +7,13 @@ public class PlayerHealth : MonoBehaviour
     float maxArmour = 6f; // 3 hits to down from normal zombies
 
     public float currentHealth { get; private set; }
-    public float _CurrentHealth; // this is shown in the inspector for debugging purposes
+    public TMP_Text _CurrentHealth; // this is shown in the inspector for debugging purposes
 
     public float currentArmour { get; private set; }
-    public float _CurrentArmour; // this is shown in the inspector for debugging purposes
+    public TMP_Text _CurrentArmour; // this is shown in the inspector for debugging purposes
 
     public bool hasSelfRevive = false; // if the player has a self-revive item, they can revive themselves once when downed. // Temp false for now.
+    public bool isdeadalready = false;
 
     private void Awake()
     {
@@ -51,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
     public void RemoveHealth(int amount)
     {
         currentHealth -= amount;
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             currentHealth = 0;
             Die();
@@ -97,6 +99,9 @@ public class PlayerHealth : MonoBehaviour
             // The game over camera priority should be set to 115 (so it will always be highest priority), and the game over UI should be displayed.
             Debug.Log("Game Over!");
 
+            if (isdeadalready) return; // prevent multiple calls to EndGame
+            isdeadalready = true;
+
             if (GameDirector.Instance != null)
             {
                 GameDirector.Instance.EndGame();
@@ -106,7 +111,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        _CurrentHealth = currentHealth; // update the inspector value for debugging
-        _CurrentArmour = currentArmour; // update the inspector value for debugging
+        _CurrentHealth.text = currentHealth.ToString(); // update the inspector value for debugging
+        _CurrentArmour.text = currentArmour.ToString(); // update the inspector value for debugging
     }
 }

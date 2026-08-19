@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: pu_sa80
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 3562327129523446561, guid: e403b0132d951924a9c00a2df388c7d8, type: 3}
+  gunName: L85A3
+  weaponClass: 0
+  calibre: {fileID: 11400000, guid: f10391ff420036743bc39f6b1d73c68b, type: 2}
+  magazineCapacity: 30
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 1
+    isSelectFire: 0
+  - fireMode: 0
+    isSelectFire: 1
+  weight: 4
+  fireRate: 650
+  tacReloadTime: 2.5
+  emptyReloadTime: 3.35
+  deployTime: 0.67
+  undeployTime: 0.27
+  ADSTime: 0.22
+  sprintToFireTime: 0.29
+  ADSSway: 0.06
+  headshotMultiplier: 1.75
+  muzzleVelocity: 900
+  falloffMin: 75
+  falloffMax: 425
+  verticalKick: 0.34
+  horizontalKickDirectionBias: -2
+  horizontalKickDirectionVariation: 3
+  recoveryDelay: 65
+  recoveryRate: 9.2
+  semiautoDynamicDispersionMultiplier: 0.75
+  adsMechanicalDispersion: 0.055
+  adsDynamicDispersion: 0.05
+  adsDynamicDispersionRecoveryRate: 6
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.2
+  adsCrouchMults:
+    stillMultiplier: 0.6
+    movingMultiplier: 1.45
+  adsProneMults:
+    stillMultiplier: 0.35
+    movingMultiplier: 1.7
+  hipMechanicalDispersion: 0.8
+  hipDynamicDispersion: 0.21
+  hipDynamicDispersionRecoveryRate: 20
+  hipStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.45
+  hipCrouchMults:
+    stillMultiplier: 0.65
+    movingMultiplier: 1.65
+  hipProneMults:
+    stillMultiplier: 0.3
+    movingMultiplier: 1.9

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: cs_hubr
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 0}
+  gunName: G308BR
+  weaponClass: 0
+  calibre: {fileID: 0}
+  magazineCapacity: 20
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 0
+    isSelectFire: 0
+  weight: 4.1
+  fireRate: 650
+  tacReloadTime: 2.45
+  emptyReloadTime: 3.25
+  deployTime: 0.67
+  undeployTime: 0.27
+  ADSTime: 0.23
+  sprintToFireTime: 0.3
+  ADSSway: 0.08
+  headshotMultiplier: 1.9
+  muzzleVelocity: 810
+  falloffMin: 90
+  falloffMax: 500
+  verticalKick: 0.58
+  horizontalKickDirectionBias: 4
+  horizontalKickDirectionVariation: 9
+  recoveryDelay: 65
+  recoveryRate: 7.4
+  semiautoDynamicDispersionMultiplier: 0.8
+  adsMechanicalDispersion: 0.06
+  adsDynamicDispersion: 0.05
+  adsDynamicDispersionRecoveryRate: 5
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.15
+  adsCrouchMults:
+    stillMultiplier: 0.6
+    movingMultiplier: 1.4
+  adsProneMults:
+    stillMultiplier: 0.35
+    movingMultiplier: 1.65
+  hipMechanicalDispersion: 0.8
+  hipDynamicDispersion: 0.3
+  hipDynamicDispersionRecoveryRate: 18
+  hipStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.5
+  hipCrouchMults:
+    stillMultiplier: 0.65
+    movingMultiplier: 1.7
+  hipProneMults:
+    stillMultiplier: 0.3
+    movingMultiplier: 1.95

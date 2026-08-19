@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: pu_an
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 3562327129523446561, guid: 134e3f0554cdf424d98940308bdf0f67, type: 3}
+  gunName: AN-94
+  weaponClass: 0
+  calibre: {fileID: 11400000, guid: 3a63cce70d47e9645a70dc305412d423, type: 2}
+  magazineCapacity: 30
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 1
+    isSelectFire: 0
+  - fireMode: 3
+    isSelectFire: 0
+  - fireMode: 0
+    isSelectFire: 1
+  weight: 3.85
+  fireRate: 600
+  tacReloadTime: 2.58
+  emptyReloadTime: 3.48
+  deployTime: 0.69
+  undeployTime: 0.28
+  ADSTime: 0.24
+  sprintToFireTime: 0.31
+  ADSSway: 0.07
+  headshotMultiplier: 1.75
+  muzzleVelocity: 900
+  falloffMin: 85
+  falloffMax: 450
+  verticalKick: 0.32
+  horizontalKickDirectionBias: 0
+  horizontalKickDirectionVariation: 2
+  recoveryDelay: 75
+  recoveryRate: 9.5
+  semiautoDynamicDispersionMultiplier: 0.75
+  adsMechanicalDispersion: 0.06
+  adsDynamicDispersion: 0.045
+  adsDynamicDispersionRecoveryRate: 6
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.15
+  adsCrouchMults:
+    stillMultiplier: 0.6
+    movingMultiplier: 1.4
+  adsProneMults:
+    stillMultiplier: 0.35
+    movingMultiplier: 1.65
+  hipMechanicalDispersion: 0.7
+  hipDynamicDispersion: 0.21
+  hipDynamicDispersionRecoveryRate: 20
+  hipStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.45
+  hipCrouchMults:
+    stillMultiplier: 0.65
+    movingMultiplier: 1.65
+  hipProneMults:
+    stillMultiplier: 0.3
+    movingMultiplier: 1.9

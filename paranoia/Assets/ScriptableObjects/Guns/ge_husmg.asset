@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: ge_husmg
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 0}
+  gunName: G9SMG
+  weaponClass: 0
+  calibre: {fileID: 0}
+  magazineCapacity: 30
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 1
+    isSelectFire: 0
+  - fireMode: 0
+    isSelectFire: 1
+  weight: 2.7
+  fireRate: 800
+  tacReloadTime: 1.72
+  emptyReloadTime: 2.2
+  deployTime: 0.38
+  undeployTime: 0.16
+  ADSTime: 0.14
+  sprintToFireTime: 0.18
+  ADSSway: 0.07
+  headshotMultiplier: 1.3
+  muzzleVelocity: 420
+  falloffMin: 20
+  falloffMax: 180
+  verticalKick: 0.25
+  horizontalKickDirectionBias: 2
+  horizontalKickDirectionVariation: 5
+  recoveryDelay: 40
+  recoveryRate: 10.5
+  semiautoDynamicDispersionMultiplier: 0.8
+  adsMechanicalDispersion: 0.07
+  adsDynamicDispersion: 0.05
+  adsDynamicDispersionRecoveryRate: 6.5
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.2
+  adsCrouchMults:
+    stillMultiplier: 0.65
+    movingMultiplier: 1.5
+  adsProneMults:
+    stillMultiplier: 0.4
+    movingMultiplier: 1.75
+  hipMechanicalDispersion: 0.55
+  hipDynamicDispersion: 0.2
+  hipDynamicDispersionRecoveryRate: 23
+  hipStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.5
+  hipCrouchMults:
+    stillMultiplier: 0.7
+    movingMultiplier: 1.7
+  hipProneMults:
+    stillMultiplier: 0.3
+    movingMultiplier: 2

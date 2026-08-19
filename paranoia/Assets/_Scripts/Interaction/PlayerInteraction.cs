@@ -14,7 +14,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private string actionKeyColour = "<color=#E7D764>"; // yellow
 
-    private float interactionRange = 2f; // how far the player can interact with objects in a sphere radius
+    private float interactionRange = 2.5f; // how far the player can interact with objects in a sphere radius
     [SerializeField] private LayerMask interactableLayer; // the layer that interactable objects are on
 
     [SerializeField] private float interactionSphereRadius = 0.5f; // radius of the sphere used to detect interactables.

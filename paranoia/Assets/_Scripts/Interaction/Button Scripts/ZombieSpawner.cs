@@ -9,6 +9,9 @@ public class ZombieSpawner : MonoBehaviour
     {
         GameObject zombie = Instantiate(zombiePrefab, spawnPoint.position, spawnPoint.rotation);
         AI_Zombie zombai = zombie.GetComponent<AI_Zombie>();
-        zombai.SpawnZombie(ZombieSpeed.Shamble, 2, 1);
+
+        int health = GameDirector.Instance != null ? GameDirector.Instance.ZombieHealthOnThisRound() : 100;
+        zombai.SpawnZombie(GameDirector.Instance, health);
     }
 }
+

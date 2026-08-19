@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
+  m_Name: pi_pmm
+  m_EditorClassIdentifier: Assembly-CSharp::GunSO
+  gunPrefab: {fileID: 3562327129523446561, guid: 9b684b0ed7d2e9f4b9382ca68e05747d, type: 3}
+  gunName: Makarov
+  weaponClass: 8
+  calibre: {fileID: 11400000, guid: 9bb41f7635147904b93fa1f30f2d83a9, type: 2}
+  magazineCapacity: 8
+  maxReserveMags: 4
+  fireModes:
+  - fireMode: 0
+    isSelectFire: 0
+  weight: 0.73
+  fireRate: 380
+  tacReloadTime: 1.45
+  emptyReloadTime: 1.86
+  deployTime: 0.3
+  undeployTime: 0.14
+  ADSTime: 0.12
+  sprintToFireTime: 0.16
+  ADSSway: 0.1
+  headshotMultiplier: 1.35
+  muzzleVelocity: 315
+  falloffMin: 15
+  falloffMax: 80
+  verticalKick: 0.42
+  horizontalKickDirectionBias: 2
+  horizontalKickDirectionVariation: 3
+  recoveryDelay: 50
+  recoveryRate: 8.5
+  semiautoDynamicDispersionMultiplier: 1
+  adsMechanicalDispersion: 0.08
+  adsDynamicDispersion: 0.18
+  adsDynamicDispersionRecoveryRate: 5.5
+  adsStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.2
+  adsCrouchMults:
+    stillMultiplier: 0.65
+    movingMultiplier: 1.45
+  adsProneMults:
+    stillMultiplier: 0.4
+    movingMultiplier: 1.7
+  hipMechanicalDispersion: 0.65
+  hipDynamicDispersion: 0.3
+  hipDynamicDispersionRecoveryRate: 20
+  hipStandMults:
+    stillMultiplier: 1
+    movingMultiplier: 1.45
+  hipCrouchMults:
+    stillMultiplier: 0.7
+    movingMultiplier: 1.7
+  hipProneMults:
+    stillMultiplier: 0.3
+    movingMultiplier: 1.95

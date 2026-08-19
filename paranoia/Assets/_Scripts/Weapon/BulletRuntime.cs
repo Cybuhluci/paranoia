@@ -64,7 +64,6 @@ public class BulletRuntime : MonoBehaviour
     {
         // penetration/damage calculations go here in a later phase.
         isLaunched = false;
-        Destroy(gameObject);
         // spawn impact effect based on the hit surface type.
         if (hit.collider != null)
         {
@@ -103,5 +102,19 @@ public class BulletRuntime : MonoBehaviour
                 Instantiate(impactPrefab, hit.point, Quaternion.LookRotation(hit.normal));
             }
         }
+
+        if (hit.rigidbody != null)
+        {
+            hit.rigidbody.AddForce(velocity * 0.1f, ForceMode.Impulse); // apply a small force to the hit object
+        }
+
+        // try and get the AI_Base component from the hit object or its parent, and call its TakeDamage method if it exists.
+        AI_BASE aiBase = hit.collider.GetComponent<AI_BASE>() ?? hit.collider.GetComponentInParent<AI_BASE>();
+        if (aiBase != null)
+        {
+            aiBase.TakeDamage(calibreSO.baseDam);
+        }
+
+        Destroy(gameObject);
     }
 }

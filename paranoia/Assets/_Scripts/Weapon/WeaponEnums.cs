@@ -3,7 +3,8 @@ public enum FireMode
 {
     SemiAuto,
     FullAuto,
-    Burst
+    Burst,
+    Hyperburst
 }
 
 public enum RecoilDirection
@@ -20,4 +21,19 @@ public enum ImpactType
     Wood,
     Concrete,
     ExtraNone
+}
+
+public enum WeaponClass
+{
+    Assault,
+    Carbine,
+    Battle,
+    Designated,
+    LightMachineG,
+    Sniper,
+    Shotgun,
+    Submachine,
+    Pistol,
+    Special,
+    Wunderwaffe
 }

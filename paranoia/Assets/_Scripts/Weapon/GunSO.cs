@@ -5,14 +5,17 @@ using UnityEngine;
 public class GunSO : ScriptableObject
 {
     public GameObject gunPrefab;
-
     public string gunName;
-    public CalibreSO calibre;
-    public int magazineCapacity;
+
+    [Header("General Stats")]
+    public WeaponClass weaponClass; 
+    public CalibreSO calibre; // the calibre of the gun, which determines what ammo it uses.
+    public int magazineCapacity; // number of rounds per magazine
     public int maxReserveMags; // maximum number of magazines the player can carry for this gun
-    public FireModeData[] fireModes;
+    public FireModeData[] fireModes; // the firemodes the gun has, and if they are select-fire or not.
 
     [Header("Handling Stats")]
+    public float weight; // in kilograms
     public int fireRate; // rounds per minute
     public float tacReloadTime; // in seconds
     public float emptyReloadTime; // in seconds
@@ -21,41 +24,38 @@ public class GunSO : ScriptableObject
     public float ADSTime; // in seconds
     public float sprintToFireTime; // in seconds
     public float ADSSway; // in degrees
+    public float headshotMultiplier; // how much damage is multiplied by when hitting the head
 
     [Header("Ballistics Stats")]
     public int muzzleVelocity; // in meters per second
-    public int falloutMin; // in metres (the point where the damage starts to fall off)
+    public int falloffMin; // in metres (the point where the damage starts to fall off)
     public int falloffMax; // in metres (the point where the damage goes to the minimum damage)
 
-    [Header("Stability Stats")] 
-    public float verticalRecoil; // in degrees, how much the gun kicks up when firing on every shot
-    public RecoilDirection recoilDirectionBias; // the direction of the first shot's recoil.
-    // as in, when firing, all varations for recoil are calculated from bias+direction first.
-    // so if we had 5deg right bias, and a 5deg variation - the first shot always goes 5deg right, and the next shots can go anywhere between 0deg and 10deg
-    // (with the centre point being that 5deg right)
-    public float horizontalRecoilDirection; // how far the bias is, in degrees (e.g: 10 degrees means the first shot moves 10 degrees to the right always)
-    public float horizontalRecoilDirectionVariation; // how much the bias can vary up and down when firing
-    // - this is random variation added to recoil after the first shot, so the first shot is always the bias, and the next shots can vary from that bias by this amount up or down.
-    // (e.g: 10 degrees bias with 5 degrees variation means the bias can be between 5 and 15 degrees)
-    // in degrees.
-    public float recoveryDelay; // in seconds
-    public float recoveryRate; // in degrees per second
+    [Header("Stability Stats")]
+    public float verticalKick; // in degrees, how much the gun kicks up when firing
+    public float horizontalKickDirectionBias; // in degrees, the centrepoint of the horizontal kick, where the variation changes it.
+    public float horizontalKickDirectionVariation; // in degrees, how much the horizontal kick can vary from the centrepoint (this is a +- value)
+    // example: bias = 1, variation = 2, then the horizontal kick can be anywhere from -1 (1deg left) to +3 (3deg right) degrees.
+    public float recoveryDelay; // in milliseconds, how long after the last shot before the gun starts to recover from recoil
+    public float recoveryRate; // in degrees per second, how fast the gun recovers from recoil after the recovery delay has passed
 
-    [Header("Accuracy/Spread Stats")] // assume everything is in degrees
-    // not to be confused with recoil, which is the movement of the gun when firing, spread is the accuracy of the gun when firing.
+    [Header("Spread Stats")] // spread calc: MD + (DD/shot * multipliers)
+    public float semiautoDynamicDispersionMultiplier; 
     // ADS zone:
-    public SpreadData ads_standing;
-    public SpreadData ads_crouching;
-    public SpreadData ads_prone;
-    public float spreadGrowthADS; // how much the spread grows when firing in ADS, in degrees per shot
-    public float spreadRecoveryADS; // how much the spread recovers when not firing in ADS, in degrees per second
+    public float adsMechanicalDispersion; // in degrees, the "base spread" for the first shot for ADS
+    public float adsDynamicDispersion; // in degrees, the "base spread" for the first shot for ADS, but this is added to the mechanical dispersion to give a total spread value.
+    public float adsDynamicDispersionRecoveryRate; // in degrees per second, how fast the dynamic dispersion recovers after the last shot for ADS
+    public SpreadData adsStandMults;
+    public SpreadData adsCrouchMults;
+    public SpreadData adsProneMults;
 
-    // Hip-Fire zone:
-    public SpreadData hip_standing;
-    public SpreadData hip_crouching;
-    public SpreadData hip_prone;
-    public float spreadGrowthHip; // how much the spread grows when firing in Hip-Fire, in degrees per shot
-    public float spreadRecoveryHip; // how much the spread recovers when not firing in Hip-Fire, in degrees per second
+    // Hip-Fire (HIP) zone:
+    public float hipMechanicalDispersion; // in degrees, the "base spread" for the first shot for HIP
+    public float hipDynamicDispersion; // in degrees, the "base spread" for the first shot for HIP, but this is added to the mechanical dispersion to give a total spread value.
+    public float hipDynamicDispersionRecoveryRate; // in degrees per second, how fast the dynamic dispersion recovers after the last shot for HIP
+    public SpreadData hipStandMults;
+    public SpreadData hipCrouchMults;
+    public SpreadData hipProneMults;
 }
 
 [Serializable]
@@ -68,6 +68,6 @@ public class FireModeData
 [Serializable]
 public class SpreadData // in degrees.
 {
-    public float stillSpread; // in degrees, how much the spread is when not moving
-    public float movingSpread; // in degrees, how much the spread is when moving
+    public float stillMultiplier; // the multiplier for the spread when the player is standing still
+    public float movingMultiplier; // the multiplier for the spread when the player is moving
 }

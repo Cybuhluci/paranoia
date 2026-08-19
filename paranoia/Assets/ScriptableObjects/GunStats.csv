@@ -1,0 +1,22 @@
+fileName,gunName,weaponClass,calibreName,magazineCapacity,maxReserveMags,weight,fireRate,tacReloadTime,emptyReloadTime,deployTime,undeployTime,ADSTime,sprintToFireTime,ADSSway,headshotMultiplier,muzzleVelocity,falloffMin,falloffMax,verticalKick,horizontalKickDirectionBias,horizontalKickDirectionVariation,recoveryDelay,recoveryRate,semiautoDynamicDispersionMultiplier,adsMechanicalDispersion,adsDynamicDispersion,adsDynamicDispersionRecoveryRate,adsStand_Still,adsStand_Move,adsCrouch_Still,adsCrouch_Move,adsProne_Still,adsProne_Move,hipMechanicalDispersion,hipDynamicDispersion,hipDynamicDispersionRecoveryRate,hipStand_Still,hipStand_Move,hipCrouch_Still,hipCrouch_Move,hipProne_Still,hipProne_Move,fireModes
+pi_pmm,Makarov,Pistol,9mm,8,4,0.73,380,1.45,1.86,0.3,0.14,0.12,0.16,0.1,1.35,315,15,80,0.42,2.0,3.0,50,8.5,1.0,0.08,0.18,5.5,1.0,1.2,0.65,1.45,0.4,1.7,0.65,0.3,20.0,1.0,1.45,0.7,1.7,0.3,1.95,SemiAuto:false
+pi_huhsp,G9HSP,Pistol,9mm,17,4,0.74,450,1.42,1.85,0.32,0.14,0.13,0.17,0.08,1.3,380,20,110,0.27,1.0,4.0,40,10.2,1.0,0.08,0.055,7.0,1.0,1.2,0.65,1.5,0.4,1.75,0.6,0.2,22.0,1.0,1.5,0.7,1.7,0.3,2.0,SemiAuto:false
+pi_1911,Colt .45,Pistol,.45 ACP,7,4,1.1,300,1.62,2.05,0.42,0.18,0.16,0.2,0.1,1.35,260,25,120,0.55,0.0,3.0,80,6.5,1.0,0.08,0.075,6.0,1.0,1.2,0.65,1.5,0.4,1.75,0.7,0.25,20.0,1.0,1.5,0.7,1.7,0.3,2.0,SemiAuto:false
+pi_57,FN Five-seveN,Pistol,5.7mm,20,4,0.74,400,1.48,1.92,0.35,0.16,0.13,0.17,0.07,1.45,650,35,180,0.24,-1.0,3.0,35,11.0,1.0,0.06,0.045,8.0,1.0,1.2,0.65,1.5,0.4,1.75,0.6,0.18,24.0,1.0,1.5,0.7,1.7,0.3,2.0,SemiAuto:false
+pi_xten,SIG P320 XTEN,Pistol,10mm,15,4,0.83,360,1.55,2.0,0.39,0.17,0.15,0.19,0.1,1.35,390,30,140,0.85,-5.0,9.0,85,6.0,1.0,0.08,0.085,6.0,1.0,1.2,0.65,1.5,0.4,1.75,0.7,0.28,20.0,1.0,1.5,0.7,1.7,0.3,2.0,SemiAuto:false
+pi_g20,Glock 20,Pistol,10mm,15,4,0.86,360,1.42,1.88,0.34,0.15,0.14,0.17,0.09,1.35,370,35,150,0.98,-5.0,10.0,92,5.4,1.0,0.08,0.09,5.5,1.0,1.2,0.65,1.5,0.4,1.75,0.75,0.3,19.0,1.0,1.5,0.7,1.7,0.3,2.0,SemiAuto:false
+
+pu_ak,AK-74M,AssaultRifle,5.45mm,30,4,3.4,600,2.46,3.34,0.66,0.26,0.23,0.3,0.1,1.7,900,75,400,0.5,1.0,2.0,100,7.5,0.8,0.1,0.075,5.0,1.0,1.2,0.65,1.5,0.4,1.75,0.75,0.25,20.0,1.0,1.5,0.7,1.7,0.3,2.0,FullAuto:false|SemiAuto:true
+pu_an,AN-94,AssaultRifle,5.45mm,30,4,3.85,600,2.58,3.48,0.69,0.28,0.24,0.31,0.07,1.75,900,85,450,0.32,0.0,2.0,75,9.5,0.75,0.06,0.045,6.0,1.0,1.15,0.6,1.4,0.35,1.65,0.7,0.21,20.0,1.0,1.45,0.65,1.65,0.3,1.9,FullAuto:false|Hyperburst:false|SemiAuto:true
+pu_aek,AEK-971,AssaultRifle,5.45mm,30,4,3.85,900,2.34,3.2,0.59,0.24,0.19,0.26,0.09,1.7,900,55,325,0.34,2.0,3.0,55,10.5,0.8,0.09,0.065,5.5,1.0,1.2,0.65,1.45,0.4,1.7,0.7,0.23,21.0,1.0,1.45,0.7,1.7,0.3,1.95,FullAuto:false|SemiAuto:true
+pu_huar,G224AR,AssaultRifle,6.8mm,30,4,3.8,750,2.38,3.16,0.61,0.25,0.21,0.28,0.11,1.8,800,85,450,0.62,3.0,4.0,85,7.2,0.75,0.08,0.06,5.0,1.0,1.2,0.6,1.45,0.35,1.7,0.8,0.24,19.0,1.0,1.5,0.7,1.75,0.3,2.0,FullAuto:false|SemiAuto:true
+pu_vhs,VHS-K2,AssaultRifle,5.56mm,30,4,3.6,850,2.38,3.18,0.52,0.21,0.17,0.23,0.08,1.75,940,45,325,0.38,-3.0,4.0,60,9.0,0.8,0.09,0.07,5.5,1.0,1.15,0.65,1.4,0.4,1.65,0.65,0.22,22.0,1.0,1.4,0.65,1.6,0.3,1.85,FullAuto:false|SemiAuto:true
+pu_sa80,L85A3,AssaultRifle,5.56mm,30,4,4.0,650,2.5,3.35,0.67,0.27,0.22,0.29,0.06,1.75,900,75,425,0.34,-2.0,3.0,65,9.2,0.75,0.055,0.05,6.0,1.0,1.2,0.6,1.45,0.35,1.7,0.8,0.21,20.0,1.0,1.45,0.65,1.65,0.3,1.9,FullAuto:false|SemiAuto:true
+
+cs_hubr,G308BR,BattleRifle,.308,20,4,4.1,650,2.45,3.25,0.67,0.27,0.23,0.3,0.08,1.9,810,90,500,0.58,4.0,9.0,65,7.4,0.8,0.06,0.05,5.0,1.0,1.15,0.6,1.4,0.35,1.65,0.8,0.3,18.0,1.0,1.5,0.65,1.7,0.3,1.95,SemiAuto:false
+
+ge_husmg,G9SMG,SubmachineGun,9mm,30,4,2.7,800,1.72,2.2,0.38,0.16,0.14,0.18,0.07,1.3,420,20,180,0.25,2.0,5.0,40,10.5,0.8,0.07,0.05,6.5,1.0,1.2,0.65,1.5,0.4,1.75,0.55,0.2,23.0,1.0,1.5,0.7,1.7,0.3,2.0,FullAuto:false|SemiAuto:true
+
+ko_hulmg,G224LMG,LightMachineGun,5.56mm,100,2,8.0,750,5.2,5.8,0.85,0.35,0.3,0.4,0.12,1.75,935,70,400,0.38,3.0,7.0,60,8.0,0.8,0.07,0.06,4.5,1.0,1.2,0.65,1.5,0.4,1.75,0.9,0.32,16.0,1.0,1.5,0.7,1.8,0.3,2.1,FullAuto:false|SemiAuto:true
+
+ku_hugl,G40GL,Special,40mm,1,4,1.5,18,3.1,3.1,0.75,0.35,0.28,0.45,0.12,1.0,76,200,500,0.1,0.0,0.0,0,10.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,SingleShot:false
