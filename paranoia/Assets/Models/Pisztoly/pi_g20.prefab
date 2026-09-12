@@ -587,7 +587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2720747878424706322}
-  - component: {fileID: -2016549428037438482}
+  - component: {fileID: 7215356843728727192}
   m_Layer: 19
   m_Name: pi_g20
   m_TagString: Untagged
@@ -611,32 +611,28 @@ Transform:
   - {fileID: 6395327372330620754}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2016549428037438482
-MonoBehaviour:
+--- !u!95 &7215356843728727192
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3562327129523446561}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 444ecfdb8b3c6c242a0bfc644a38fcc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GunRuntime
-  gunModelTransorm: {fileID: 6395327372330620754}
-  muzzleTransform: {fileID: 3584197444115000652}
-  aimTransform: {fileID: 0}
-  maxAimDistance: 500
-  ignoreLayers:
-    serializedVersion: 2
-    m_Bits: 1573188
-  playerInput: {fileID: 0}
-  gunMain: {fileID: 0}
-  gunAnimator: {fileID: 0}
-  playerController: {fileID: 0}
-  sprintPositionOffset: {x: 0, y: -0.15, z: 0}
-  sprintRotationOffset: {x: 35, y: -15, z: 0}
-  sprintPoseSpeed: 8
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d3cce3d0da73194dbdf3f3e810de2ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5496863102800690202
 GameObject:
   m_ObjectHideFlags: 0

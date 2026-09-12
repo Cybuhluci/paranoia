@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    float maxHealth = 6f; // 3 hits to down from normal zombies
-    float maxArmour = 6f; // 3 hits to down from normal zombies
+    float maxHealth = 100f; // 3 hits to down from normal zombies
+    float maxArmour = 50f; // 3 hits to down from normal zombies
 
     public float currentHealth { get; private set; }
     public TMP_Text _CurrentHealth; // this is shown in the inspector for debugging purposes
@@ -101,11 +101,6 @@ public class PlayerHealth : MonoBehaviour
 
             if (isdeadalready) return; // prevent multiple calls to EndGame
             isdeadalready = true;
-
-            if (GameDirector.Instance != null)
-            {
-                GameDirector.Instance.EndGame();
-            }
         }
     }
 

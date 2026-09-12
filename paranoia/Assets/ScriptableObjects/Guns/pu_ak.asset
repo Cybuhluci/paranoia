@@ -41,6 +41,7 @@ MonoBehaviour:
   horizontalKickDirectionVariation: 2
   recoveryDelay: 100
   recoveryRate: 7.5
+  ADSReductionMultiplier: 0.5
   semiautoDynamicDispersionMultiplier: 0.8
   adsMechanicalDispersion: 0.1
   adsDynamicDispersion: 0.075

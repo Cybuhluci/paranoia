@@ -38,6 +38,7 @@ public class GunSO : ScriptableObject
     // example: bias = 1, variation = 2, then the horizontal kick can be anywhere from -1 (1deg left) to +3 (3deg right) degrees.
     public float recoveryDelay; // in milliseconds, how long after the last shot before the gun starts to recover from recoil
     public float recoveryRate; // in degrees per second, how fast the gun recovers from recoil after the recovery delay has passed
+    public float ADSReductionMultiplier; // the multiplier for the recoil when aiming down sights (ADS)
 
     [Header("Spread Stats")] // spread calc: MD + (DD/shot * multipliers)
     public float semiautoDynamicDispersionMultiplier; 
