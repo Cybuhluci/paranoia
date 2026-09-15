@@ -29,7 +29,7 @@ public enum WeaponClass
     Carbine,
     Battle,
     Designated,
-    LightMachineG,
+    LightMachine,
     Sniper,
     Shotgun,
     Submachine,

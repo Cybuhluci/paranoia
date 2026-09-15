@@ -61,4 +61,13 @@ public class PlayerCamera : MonoBehaviour
 
         playerCameraTransform.eulerAngles = new Vector3(pitch, yaw, 0f);
     }
+
+    // Called by GunRuntime after firing a shot. Purely kicks the camera's rotation - no effect on the gun model itself.
+    public void ApplyRecoil(float verticalKick, float horizontalKick)
+    {
+        pitch -= verticalKick; // kicks the view up
+        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+
+        yaw += horizontalKick;
+    }
 }

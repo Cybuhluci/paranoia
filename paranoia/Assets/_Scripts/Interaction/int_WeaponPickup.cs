@@ -12,7 +12,7 @@ public class int_WeaponPickup : MonoBehaviour, IInteractable
 
     public void OnInteract(GameObject interactor)
     {
-        //GunMain.Instance.AddGun(gunToPickup);
+        GunMain.Instance.AddGun(gunToPickup);
     }
 
     public bool IsPressInteraction()

@@ -58,7 +58,6 @@ public class GunSOGenerator : EditorWindow
             string assetName = row["fileName"];
             string assetPath = $"{targetFolderPath}/{assetName}.asset";
 
-            // Load existing asset if present so you don't lose linked Prefabs/SO references, or create a new one
             GunSO gun = AssetDatabase.LoadAssetAtPath<GunSO>(assetPath);
             if (gun == null)
             {
@@ -70,6 +69,7 @@ public class GunSOGenerator : EditorWindow
             gun.gunName = GetStr(row, "gunName");
             gun.weaponClass = Enum.TryParse(GetStr(row, "weaponClass"), true, out WeaponClass wClass) ? wClass : default;
             gun.magazineCapacity = GetInt(row, "magazineCapacity");
+            gun.usesMagazines = GetBool(row, "usesMagazines");
             gun.maxReserveMags = GetInt(row, "maxReserveMags");
 
             // Handling Stats
@@ -84,17 +84,14 @@ public class GunSOGenerator : EditorWindow
             gun.ADSSway = GetFloat(row, "ADSSway");
             gun.headshotMultiplier = GetFloat(row, "headshotMultiplier");
 
-            // Ballistics
+            // Ballistics Stats
             gun.muzzleVelocity = GetInt(row, "muzzleVelocity");
-            gun.falloffMin = GetInt(row, "falloffMin");
-            gun.falloffMax = GetInt(row, "falloffMax");
 
-            // Stability
+            // Stability Stats
             gun.verticalKick = GetFloat(row, "verticalKick");
             gun.horizontalKickDirectionBias = GetFloat(row, "horizontalKickDirectionBias");
             gun.horizontalKickDirectionVariation = GetFloat(row, "horizontalKickDirectionVariation");
-            gun.recoveryDelay = GetFloat(row, "recoveryDelay");
-            gun.recoveryRate = GetFloat(row, "recoveryRate");
+            gun.ADSReductionMultiplier = GetFloat(row, "ADSReductionMultiplier");
 
             // Spread Base
             gun.semiautoDynamicDispersionMultiplier = GetFloat(row, "semiautoDynamicDispersionMultiplier");
@@ -129,7 +126,7 @@ public class GunSOGenerator : EditorWindow
                 }
             }
 
-            // Assign assets automatically if named matchingly in Resources or specific paths
+            // Assign assets automatically
             string prefabPath = $"Assets/Prefabs/Guns/{assetName}.prefab";
             if (File.Exists(prefabPath)) gun.gunPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
 
@@ -147,4 +144,5 @@ public class GunSOGenerator : EditorWindow
     private string GetStr(Dictionary<string, string> d, string k) => d.ContainsKey(k) ? d[k] : "";
     private float GetFloat(Dictionary<string, string> d, string k) => float.TryParse(GetStr(d, k), out float v) ? v : 0f;
     private int GetInt(Dictionary<string, string> d, string k) => int.TryParse(GetStr(d, k), out int v) ? v : 0;
+    private bool GetBool(Dictionary<string, string> d, string k) => bool.TryParse(GetStr(d, k), out bool v) ? v : false;
 }

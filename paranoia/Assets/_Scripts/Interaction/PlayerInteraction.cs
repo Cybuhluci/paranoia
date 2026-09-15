@@ -29,6 +29,8 @@ public class PlayerInteraction : MonoBehaviour
     private float holdInteractionTime; // how long the hold interaction has been held, in seconds.
     private float requiredHoldTime = 0.25f; // how long the player needs to hold the interact key for a hold interaction.
 
+    private bool interactionLatched = false; // true once an interaction has fired, prevents re-firing until the key is released.
+
     private void Awake()
     {
         if (playerInput == null)
@@ -83,11 +85,23 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
+        // once the key is released, allow interactions to fire again.
+        if (interactionLatched && !interactAction.IsPressed())
+        {
+            interactionLatched = false;
+        }
+
+        if (interactionLatched)
+        {
+            return;
+        }
+
         if (currentInteractable.IsPressInteraction())
         {
             if (interactAction.WasPressedThisFrame())
             {
                 currentInteractable.OnInteract(gameObject);
+                interactionLatched = true;
             }
         }
         else
@@ -101,6 +115,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     currentInteractable.OnInteract(gameObject);
                     ResetHoldInteraction();
+                    interactionLatched = true;
                 }
             }
             else

@@ -11,6 +11,7 @@ public class GunSO : ScriptableObject
     public WeaponClass weaponClass; 
     public CalibreSO calibre; // the calibre of the gun, which determines what ammo it uses.
     public int magazineCapacity; // number of rounds per magazine
+    public bool usesMagazines; // if the gun uses magazines or not (if not, it uses a single ammo pool)
     public int maxReserveMags; // maximum number of magazines the player can carry for this gun
     public FireModeData[] fireModes; // the firemodes the gun has, and if they are select-fire or not.
 
@@ -27,17 +28,13 @@ public class GunSO : ScriptableObject
     public float headshotMultiplier; // how much damage is multiplied by when hitting the head
 
     [Header("Ballistics Stats")]
-    public int muzzleVelocity; // in meters per second
-    public int falloffMin; // in metres (the point where the damage starts to fall off)
-    public int falloffMax; // in metres (the point where the damage goes to the minimum damage)
+    public int muzzleVelocity; // in meters per second - how fast the bullet leaves the barrel of the gun
 
     [Header("Stability Stats")]
     public float verticalKick; // in degrees, how much the gun kicks up when firing
     public float horizontalKickDirectionBias; // in degrees, the centrepoint of the horizontal kick, where the variation changes it.
     public float horizontalKickDirectionVariation; // in degrees, how much the horizontal kick can vary from the centrepoint (this is a +- value)
     // example: bias = 1, variation = 2, then the horizontal kick can be anywhere from -1 (1deg left) to +3 (3deg right) degrees.
-    public float recoveryDelay; // in milliseconds, how long after the last shot before the gun starts to recover from recoil
-    public float recoveryRate; // in degrees per second, how fast the gun recovers from recoil after the recovery delay has passed
     public float ADSReductionMultiplier; // the multiplier for the recoil when aiming down sights (ADS)
 
     [Header("Spread Stats")] // spread calc: MD + (DD/shot * multipliers)

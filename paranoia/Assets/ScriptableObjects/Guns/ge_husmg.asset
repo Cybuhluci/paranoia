@@ -17,6 +17,7 @@ MonoBehaviour:
   weaponClass: 0
   calibre: {fileID: 0}
   magazineCapacity: 30
+  usesMagazines: 1
   maxReserveMags: 4
   fireModes:
   - fireMode: 1
@@ -34,14 +35,10 @@ MonoBehaviour:
   ADSSway: 0.07
   headshotMultiplier: 1.3
   muzzleVelocity: 420
-  falloffMin: 20
-  falloffMax: 180
   verticalKick: 0.25
   horizontalKickDirectionBias: 2
   horizontalKickDirectionVariation: 5
-  recoveryDelay: 40
-  recoveryRate: 10.5
-  ADSReductionMultiplier: 0.5
+  ADSReductionMultiplier: 0.8
   semiautoDynamicDispersionMultiplier: 0.8
   adsMechanicalDispersion: 0.07
   adsDynamicDispersion: 0.05

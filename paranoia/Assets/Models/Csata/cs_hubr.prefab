@@ -587,10 +587,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2720747878424706322}
-  - component: {fileID: 7215356843728727192}
-  - component: {fileID: 7566917654806787441}
+  - component: {fileID: 6546160148301358747}
+  - component: {fileID: 4311475541738487218}
   m_Layer: 19
-  m_Name: pi_g20
+  m_Name: cs_hubr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,7 +612,7 @@ Transform:
   - {fileID: 6395327372330620754}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7215356843728727192
+--- !u!95 &6546160148301358747
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -634,7 +634,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7566917654806787441
+--- !u!114 &4311475541738487218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98cfaff31c91f54eb077bcc1d5c1897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunRuntime
-  gunAnimator: {fileID: 7215356843728727192}
+  gunAnimator: {fileID: 6546160148301358747}
   muzzleTransform: {fileID: 3584197444115000652}
   playerInput: {fileID: 0}
   burstShotInterval: 0.08

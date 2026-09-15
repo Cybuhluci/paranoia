@@ -588,6 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2720747878424706322}
   - component: {fileID: -8103096623262707330}
+  - component: {fileID: 1232942725191738387}
   m_Layer: 19
   m_Name: pu_ak
   m_TagString: Untagged
@@ -633,6 +634,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1232942725191738387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562327129523446561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98cfaff31c91f54eb077bcc1d5c1897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunRuntime
+  gunAnimator: {fileID: -8103096623262707330}
+  muzzleTransform: {fileID: 3584197444115000652}
+  playerInput: {fileID: 0}
+  burstShotInterval: 0.08
 --- !u!1 &5496863102800690202
 GameObject:
   m_ObjectHideFlags: 0

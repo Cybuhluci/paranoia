@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b66261083956a649b150dce9e1b3543, type: 3}
   m_Name: cs_hubr
   m_EditorClassIdentifier: Assembly-CSharp::GunSO
-  gunPrefab: {fileID: 0}
+  gunPrefab: {fileID: 3562327129523446561, guid: f0ec7a7768a701e45b37b3672c24d67d, type: 3}
   gunName: G308BR
   weaponClass: 0
-  calibre: {fileID: 0}
+  calibre: {fileID: 11400000, guid: dc5ffcea7eb04c543ba0295dff24accb, type: 2}
   magazineCapacity: 20
+  usesMagazines: 1
   maxReserveMags: 4
   fireModes:
   - fireMode: 0
@@ -32,14 +33,10 @@ MonoBehaviour:
   ADSSway: 0.08
   headshotMultiplier: 1.9
   muzzleVelocity: 810
-  falloffMin: 90
-  falloffMax: 500
   verticalKick: 0.58
   horizontalKickDirectionBias: 4
   horizontalKickDirectionVariation: 9
-  recoveryDelay: 65
-  recoveryRate: 7.4
-  ADSReductionMultiplier: 0.5
+  ADSReductionMultiplier: 0.8
   semiautoDynamicDispersionMultiplier: 0.8
   adsMechanicalDispersion: 0.06
   adsDynamicDispersion: 0.05

@@ -7,6 +7,8 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] Slider sensitivitySlider;
     [SerializeField] TMP_Text sensitivityValueText;
 
+    [SerializeField] Toggle toggleRunSprintToggle;
+
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
@@ -26,5 +28,10 @@ public class OptionsMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("Sensitivity", (int)sensitivitySlider.value);
         sensitivityValueText.text = sensitivitySlider.value.ToString();
+    }
+
+    public void SetRunSprintToggle(bool isToggled)
+    {
+        PlayerPrefs.SetInt("RunSprintToggle", isToggled ? 1 : 0);
     }
 }

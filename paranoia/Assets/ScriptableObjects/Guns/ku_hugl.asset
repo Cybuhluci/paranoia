@@ -17,6 +17,7 @@ MonoBehaviour:
   weaponClass: 9
   calibre: {fileID: 0}
   magazineCapacity: 1
+  usesMagazines: 0
   maxReserveMags: 4
   fireModes:
   - fireMode: 0
@@ -32,14 +33,10 @@ MonoBehaviour:
   ADSSway: 0.12
   headshotMultiplier: 1
   muzzleVelocity: 76
-  falloffMin: 200
-  falloffMax: 500
   verticalKick: 0.1
   horizontalKickDirectionBias: 0
   horizontalKickDirectionVariation: 0
-  recoveryDelay: 0
-  recoveryRate: 10
-  ADSReductionMultiplier: 0.5
+  ADSReductionMultiplier: 0.8
   semiautoDynamicDispersionMultiplier: 1
   adsMechanicalDispersion: 0
   adsDynamicDispersion: 0
