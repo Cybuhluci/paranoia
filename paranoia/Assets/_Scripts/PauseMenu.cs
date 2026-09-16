@@ -14,6 +14,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject PauseScreenFull, PauseFront, OptionsScreen;
     [SerializeField] Image pauseTabButton, optionsTabButton;
 
+    Color tabImageColour;
+
     bool isPaused = false;
     int currentTab = 0; // 0 = PauseFront, 1 = OptionsScreen
 
@@ -22,6 +24,26 @@ public class PauseMenu : MonoBehaviour
         pauseAction = playerInput.actions["Player/Pause"]; // Key Press - this is one the Player ActionMap
         resumeAction = playerInput.actions["UI/Pause"]; // Key Press - this is one the UI ActionMap
         tabSwitchAction = playerInput.actions["UI/TabSwitch"]; // 1D axis - this is one the UI ActionMap
+
+        GameAccentColourManager.Instance.OnAccentColourChanged += UpdateTabButtonColours;
+        tabImageColour = GameAccentColourManager.Instance.AccentColour;
+    }
+
+    void UpdateTabButtonColours(Color colour)
+    {
+        tabImageColour = colour;
+        if (!isPaused) return;
+
+        if (currentTab == 0)
+        {
+            pauseTabButton.color = tabImageColour;
+            optionsTabButton.color = Color.gray;
+        }
+        else
+        {
+            pauseTabButton.color = Color.gray;
+            optionsTabButton.color = tabImageColour;
+        }
     }
 
     // Update is called once per frame
@@ -90,7 +112,7 @@ public class PauseMenu : MonoBehaviour
         currentTab = 0;
         OptionsScreen.SetActive(false);
         PauseFront.SetActive(true);
-        pauseTabButton.color = Color.orangeRed;
+        pauseTabButton.color = tabImageColour;
         optionsTabButton.color = Color.gray;
     }
 
@@ -100,7 +122,7 @@ public class PauseMenu : MonoBehaviour
         PauseFront.SetActive(false);
         OptionsScreen.SetActive(true);
         pauseTabButton.color = Color.gray;
-        optionsTabButton.color = Color.orangeRed;
+        optionsTabButton.color = tabImageColour;
     }
 
     public void QuitToMenu()

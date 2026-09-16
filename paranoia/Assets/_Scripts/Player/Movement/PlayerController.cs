@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     float sprintSpeed = 6f;
 
     float sprintStamina = 100f;
+    float maxStamina = 100f;
     float sprintStaminaDrainRate = 15f; // Stamina drained per second while sprinting
 
     // stance states
@@ -50,8 +51,7 @@ public class PlayerController : MonoBehaviour
     bool isRunning; // true while the Sprint action is held down
     bool isSprinting; // true while actively sprinting (after a double tap, and stamina remains)
 
-    public bool toggleRunSprint; // if true, Sprint key toggles running on/off instead of requiring hold. Read from PlayerPrefs.
-    public bool runToggledOn; // current toggle state of running, only used when toggleRunSprint is true
+    public bool toggleRunSprint; // if true, Sprint key press toggles running/sprinting instead of requiring hold. Read from PlayerPrefs.
 
     // Phase 3: crouching
     [SerializeField] float crouchTransitionSpeed = 8f; // how quickly the character/camera height lerps between stances
@@ -77,32 +77,53 @@ public class PlayerController : MonoBehaviour
 
         toggleRunSprint = PlayerPrefs.GetInt("RunSprintToggle", 0) == 1;
 
-        runSprintAction.performed += OnSprintTap;
+        runSprintAction.performed += OnSprintPress;
         crouchAction.performed += OnCrouchToggle;
         proneAction.performed += OnProneToggle;
     }
 
     private void OnDestroy()
     {
-        runSprintAction.performed -= OnSprintTap;
+        runSprintAction.performed -= OnSprintPress;
         crouchAction.performed -= OnCrouchToggle;
         proneAction.performed -= OnProneToggle;
     }
 
-    void OnSprintTap(InputAction.CallbackContext context)
+    void OnSprintPress(InputAction.CallbackContext context)
     {
-        // detect double tap of the Sprint key to toggle sprinting mode
-        if (Time.time - lastSprintTapTime <= doubleTapWindow)
+        if (toggleRunSprint)
         {
-            isSprinting = !isSprinting;
-        }
-        else if (toggleRunSprint)
-        {
-            // single tap while in toggle mode flips the running state on/off
-            runToggledOn = !runToggledOn;
-        }
+            // toggle mode: each press advances walk -> run -> sprint (no double-tap timing needed).
+            // requires the forward movement key to be held to start running, and to be grounded.
+            // read fresh input rather than the cached field, which may be a frame stale here.
+            bool isMovingForward = moveAction.ReadValue<Vector2>().y > 0.01f;
 
-        lastSprintTapTime = Time.time;
+            if (!isGrounded)
+                return; // can't start or escalate running/sprinting while airborne
+
+            if (!isRunning)
+            {
+                if (isMovingForward)
+                {
+                    isRunning = true;
+                }
+            }
+            else if (!isSprinting)
+            {
+                isSprinting = true;
+            }
+            // if already sprinting, a further press does nothing - only releasing the forward key cancels it
+        }
+        else
+        {
+            // hold mode: double tap the Sprint key while holding it to toggle sprinting
+            if (Time.time - lastSprintTapTime <= doubleTapWindow)
+            {
+                isSprinting = !isSprinting;
+            }
+
+            lastSprintTapTime = Time.time;
+        }
     }
 
     void OnCrouchToggle(InputAction.CallbackContext context)
@@ -217,13 +238,28 @@ public class PlayerController : MonoBehaviour
         if (toggleCheck != toggleRunSprint)
         {
             toggleRunSprint = toggleCheck;
-            runToggledOn = false; // reset toggle state when the setting changes to avoid getting stuck running
+            isRunning = false; // reset state when the setting changes to avoid getting stuck running
+            isSprinting = false;
         }
 
-        isRunning = toggleRunSprint ? runToggledOn : runSprintAction.IsPressed();
+        if (toggleRunSprint)
+        {
+            // toggle mode: running/sprinting persist until the forward movement key is released
+            bool isMovingForward = moveInput.y > 0.01f;
+            if (!isMovingForward || !isGrounded)
+            {
+                isRunning = false;
+                isSprinting = false;
+            }
+        }
+        else
+        {
+            // hold mode: running requires the Sprint key to be held down, and being grounded
+            isRunning = runSprintAction.IsPressed() && isGrounded;
+        }
 
-        // sprinting is cancelled if the player stops running, stops moving, runs out of stamina, or is crouching/prone
-        if (!isRunning || !isMoving || sprintStamina <= 0f || isCrouching || isProne)
+        // sprinting is cancelled if the player stops running, stops moving, runs out of stamina, is crouching/prone, or is airborne
+        if (!isRunning || !isMoving || sprintStamina <= 0f || isCrouching || isProne || !isGrounded)
         {
             isSprinting = false;
         }
@@ -253,6 +289,12 @@ public class PlayerController : MonoBehaviour
         {
             // running while crouched is capped to walkSpeed, otherwise use crouchSpeed
             currentSpeed = isRunning ? walkSpeed : crouchSpeed;
+        }
+
+        if (!isGrounded)
+        {
+            // no run/sprint-jumping - airborne movement is always at walkSpeed
+            currentSpeed = walkSpeed;
         }
 
         HandleStanceTransition();
@@ -311,5 +353,14 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         
+    }
+
+    public float GetStamina()
+    {
+        return sprintStamina;
+    }
+    public float GetMaxStamina()
+    {
+        return maxStamina;
     }
 }

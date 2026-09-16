@@ -1176,7 +1176,6 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   doubleTapWindow: 0.3
   toggleRunSprint: 0
-  runToggledOn: 0
   crouchTransitionSpeed: 8
   standUpObstacleMask:
     serializedVersion: 2
@@ -1308,9 +1307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Close Menu
-
-'
+  m_text: Apply Changes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3971,7 +3968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.61960787, g: 0.5372549, b: 0.47843137, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4924,7 +4921,7 @@ GameObject:
   - component: {fileID: 1146037715}
   - component: {fileID: 1146037714}
   m_Layer: 5
-  m_Name: Close Options Menu
+  m_Name: Apply
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5189,7 +5186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.2264151, g: 0.19339624, b: 0.16981132, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5556,6 +5553,7 @@ GameObject:
   - component: {fileID: 1288073329}
   - component: {fileID: 1288073328}
   - component: {fileID: 1288073327}
+  - component: {fileID: 1288073330}
   m_Layer: 5
   m_Name: QuitToMenu
   m_TagString: Untagged
@@ -5677,6 +5675,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288073325}
   m_CullTransparentMesh: 1
+--- !u!114 &1288073330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288073325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abcd2af21878f5479af64ef6a361981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAccentColourChanger
 --- !u!1 &1291998496
 GameObject:
   m_ObjectHideFlags: 0
@@ -5761,6 +5771,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1298920786}
+  - component: {fileID: 1298920791}
   - component: {fileID: 1298920787}
   - component: {fileID: 1298920788}
   - component: {fileID: 1298920789}
@@ -5862,6 +5873,19 @@ MonoBehaviour:
   secondaryGunSO: {fileID: 0}
   specialGunSO: {fileID: 0}
   currentGun: {fileID: 0}
+--- !u!114 &1298920791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298920785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14aaa8befa634bc4c8745526b3c658eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAccentColourManager
+  currentProfile: {fileID: 11400000, guid: ef7a321dd8c25034593ed983b731b236, type: 2}
 --- !u!1 &1317688458
 GameObject:
   m_ObjectHideFlags: 0
@@ -5874,6 +5898,7 @@ GameObject:
   - component: {fileID: 1317688462}
   - component: {fileID: 1317688461}
   - component: {fileID: 1317688460}
+  - component: {fileID: 1317688463}
   m_Layer: 5
   m_Name: Resume
   m_TagString: Untagged
@@ -5995,6 +6020,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317688458}
   m_CullTransparentMesh: 1
+--- !u!114 &1317688463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317688458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abcd2af21878f5479af64ef6a361981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAccentColourChanger
 --- !u!1 &1325499820
 GameObject:
   m_ObjectHideFlags: 0
@@ -6184,6 +6221,7 @@ GameObject:
   - component: {fileID: 1398994499}
   - component: {fileID: 1398994501}
   - component: {fileID: 1398994500}
+  - component: {fileID: 1398994502}
   m_Layer: 5
   m_Name: OPTIONS TAB
   m_TagString: Untagged
@@ -6250,6 +6288,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398994498}
   m_CullTransparentMesh: 1
+--- !u!114 &1398994502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398994498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abcd2af21878f5479af64ef6a361981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAccentColourChanger
 --- !u!1 &1466217716
 GameObject:
   m_ObjectHideFlags: 0
@@ -7378,6 +7428,7 @@ GameObject:
   - component: {fileID: 1843467847}
   - component: {fileID: 1843467846}
   - component: {fileID: 1843467845}
+  - component: {fileID: 1843467848}
   m_Layer: 5
   m_Name: QuitToDesktop
   m_TagString: Untagged
@@ -7499,6 +7550,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843467843}
   m_CullTransparentMesh: 1
+--- !u!114 &1843467848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843467843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abcd2af21878f5479af64ef6a361981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAccentColourChanger
 --- !u!1 &1897658276
 GameObject:
   m_ObjectHideFlags: 0
@@ -7620,6 +7683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1943441398}
   - component: {fileID: 1943441399}
+  - component: {fileID: 1943441400}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -7695,11 +7759,24 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1000
-  m_WholeNumbers: 1
-  m_Value: 0
+  m_WholeNumbers: 0
+  m_Value: 1000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1943441400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943441397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5f65ad1b29eb4448190e641d1b06b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaminaTempHUD
+  playerController: {fileID: 209925375}
 --- !u!1 &1962585593
 GameObject:
   m_ObjectHideFlags: 0
@@ -7711,6 +7788,7 @@ GameObject:
   - component: {fileID: 1962585594}
   - component: {fileID: 1962585596}
   - component: {fileID: 1962585595}
+  - component: {fileID: 1962585597}
   m_Layer: 5
   m_Name: PAUSE TAB
   m_TagString: Untagged
@@ -7777,6 +7855,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962585593}
   m_CullTransparentMesh: 1
+--- !u!114 &1962585597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962585593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9abcd2af21878f5479af64ef6a361981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameAccentColourChanger
 --- !u!1 &1966207392
 GameObject:
   m_ObjectHideFlags: 0
