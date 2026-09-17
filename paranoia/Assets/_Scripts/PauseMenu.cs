@@ -24,7 +24,18 @@ public class PauseMenu : MonoBehaviour
         pauseAction = playerInput.actions["Player/Pause"]; // Key Press - this is one the Player ActionMap
         resumeAction = playerInput.actions["UI/Pause"]; // Key Press - this is one the UI ActionMap
         tabSwitchAction = playerInput.actions["UI/TabSwitch"]; // 1D axis - this is one the UI ActionMap
+    }
 
+    private void Start()
+    {
+        // Unity does not guarantee Awake() execution order between different scripts, so GameAccentColourManager's
+        // own Awake() (which sets Instance) might not have run yet if we subscribed here instead. Every script's
+        // Awake() is guaranteed to finish before any Start() runs, so subscribing here ensures Instance is always set.
+        UpdateAccents();
+    }
+
+    void UpdateAccents()
+    {
         GameAccentColourManager.Instance.OnAccentColourChanged += UpdateTabButtonColours;
         tabImageColour = GameAccentColourManager.Instance.AccentColour;
     }

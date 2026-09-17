@@ -143,7 +143,13 @@ public class GunRuntime : MonoBehaviour
         UpdateDynamicDispersion();
 
         if (aimAction != null)
+        {
+            bool wasAiming = isAiming;
             isAiming = aimAction.IsPressed();
+
+            if (isAiming != wasAiming && gunAnimator != null)
+                gunAnimator.SetBool("IsAiming", isAiming);
+        }
 
         if (isReloading) return;
 
